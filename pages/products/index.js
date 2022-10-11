@@ -10,8 +10,22 @@ export default function Products(props) {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <br />
       <Link href="/">
-        <a>Home</a>
+        <a>Home </a>
+      </Link>
+      <Link href="/products/addNewProduct">
+        <a
+          style={{
+            marginLeft: "40px",
+            background: "blue",
+            color: "white",
+            padding: "5px 10px",
+            borderRadius: "15px",
+          }}
+        >
+          Add New Product
+        </a>
       </Link>
       <br />
       <hr />
