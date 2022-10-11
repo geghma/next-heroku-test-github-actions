@@ -2,25 +2,25 @@
 
 import JSONdb from "simple-json-db";
 import path from "path";
-console.log(path.resolve("..publick", "_myDataBase.json"));
-export const db = new JSONdb(path.resolve("./_myDataBase.json"));
+console.log(path.resolve("../public", "_myDataBase.json"));
+export const db = new JSONdb(path.resolve("./public", "_myDataBase.json"));
 
 function InitDb() {
   const products = db.get("products");
   if (!products) {
     db.set("products", [
       {
-        id: 1,
+        id: "1",
         name: "product 1",
         price: 10,
       },
       {
-        id: 2,
+        id: "2",
         name: "product 2",
         price: 20,
       },
       {
-        id: 3,
+        id: "3",
         name: "product 3",
         price: 30,
       },
