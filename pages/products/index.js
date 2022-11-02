@@ -1,6 +1,10 @@
 import Head from "next/head";
 import { db } from "../api/hello";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
+import gsap from 'gsap'
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Products(props) {
   console.log(props);
@@ -31,7 +35,42 @@ export default function Products(props) {
       <hr />
       {props.products.map((product) => {
         return (
-          <div
+          <Product key = {product.id} product={product}/>
+        );
+      })}
+    </div>
+  );
+}
+
+
+const Product = ({product})=>{
+  const domnode = useRef(null)
+  useEffect(()=>{
+    if (domnode.current) {
+      gsap.fromTo(
+        domnode.current,
+        { opacity: 0.2, y: 50, scale: 0.95 },
+        {
+          // paused: true,
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          scale: 1,
+          ease: '',
+          delay: 0,
+
+          scrollTrigger: {
+            trigger: domnode.current,
+            toggleActions: 'resume',
+          },
+        }
+      );
+    }
+  },[])
+
+  return (
+    <div 
+     ref={domnode}
             key={product.id}
             style={{
               background: "#d3d3d347",
@@ -50,11 +89,10 @@ export default function Products(props) {
               <a style={{ fontSize: "40px" }}>↦</a>
             </Link>
           </div>
-        );
-      })}
-    </div>
-  );
+  )
 }
+
+
 
 export async function getStaticProps() {
   const data = db.get("products");
